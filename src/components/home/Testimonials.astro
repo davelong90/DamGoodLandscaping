@@ -1,0 +1,84 @@
+---
+import { testimonials } from '../../data/testimonials';
+import SectionHeader from '../shared/SectionHeader.astro';
+import { site } from '../../data/site';
+---
+
+<section class="section section-green" aria-labelledby="testimonials-heading">
+  <div class="container">
+    <SectionHeader
+      label="What Customers Say"
+      title="Real Results for Real Homeowners"
+      subtitle={`Serving ${site.serviceArea}.`}
+    />
+
+    <div class="grid grid-3">
+      {testimonials.map(t => (
+        <article class="testimonial-card card">
+          <div class="card-body">
+            <div class="stars" aria-label={`${t.rating} out of 5 stars`} role="img">
+              {'★'.repeat(t.rating)}
+            </div>
+            <blockquote>
+              <p>"{t.text}"</p>
+            </blockquote>
+            <footer class="testimonial-meta">
+              <strong class="testimonial-name">{t.name}</strong>
+              <span class="testimonial-location">{t.location}</span>
+            </footer>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonial-card {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .testimonial-card .card-body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .stars {
+    font-size: var(--font-xl);
+    margin-bottom: var(--space-4);
+  }
+
+  blockquote {
+    flex: 1;
+    margin: 0;
+    margin-bottom: var(--space-5);
+  }
+
+  blockquote p {
+    color: var(--color-text-muted);
+    font-size: var(--font-sm);
+    line-height: var(--leading-relaxed);
+    font-style: italic;
+  }
+
+  .testimonial-meta {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .testimonial-name {
+    font-weight: var(--weight-semibold);
+    font-size: var(--font-sm);
+    color: var(--color-text);
+  }
+
+  .testimonial-location {
+    font-size: var(--font-xs);
+    color: var(--color-text-muted);
+  }
+</style>

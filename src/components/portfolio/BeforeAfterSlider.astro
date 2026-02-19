@@ -1,0 +1,193 @@
+---
+interface Props {
+  beforeSrc: string;
+  afterSrc: string;
+  beforeAlt?: string;
+  afterAlt?: string;
+  label?: string;
+}
+
+const {
+  beforeSrc,
+  afterSrc,
+  beforeAlt = 'Before landscaping work',
+  afterAlt  = 'After landscaping work',
+  label,
+} = Astro.props;
+---
+
+<figure class="ba-figure">
+  {label && <figcaption class="ba-label">{label}</figcaption>}
+
+  <div class="ba-container" style="--split: 50%;">
+    <!-- Before image (bottom layer) -->
+    <img
+      src={beforeSrc}
+      alt={beforeAlt}
+      class="ba-img ba-before"
+      loading="lazy"
+      width="1200"
+      height="800"
+      draggable="false"
+    />
+
+    <!-- After image (top layer, clipped) -->
+    <img
+      src={afterSrc}
+      alt={afterAlt}
+      class="ba-img ba-after"
+      loading="lazy"
+      width="1200"
+      height="800"
+      draggable="false"
+    />
+
+    <!-- Divider line and handle -->
+    <div class="ba-divider" aria-hidden="true">
+      <div class="ba-handle">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="9 18 15 12 9 6"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Labels -->
+    <span class="ba-badge ba-badge--before" aria-hidden="true">Before</span>
+    <span class="ba-badge ba-badge--after" aria-hidden="true">After</span>
+
+    <!-- Range input (the interactive element) -->
+    <input
+      type="range"
+      min="0"
+      max="100"
+      value="50"
+      class="ba-range"
+      aria-label="Drag to compare before and after"
+    />
+  </div>
+</figure>
+
+<style>
+  .ba-figure {
+    margin: 0;
+  }
+
+  .ba-label {
+    font-size: var(--font-sm);
+    color: var(--color-text-muted);
+    text-align: center;
+    margin-bottom: var(--space-3);
+    font-style: italic;
+  }
+
+  .ba-container {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    background: var(--color-gray-200);
+    box-shadow: var(--shadow-md);
+    user-select: none;
+  }
+
+  .ba-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+  }
+
+  /* After image is clipped to show the RIGHT portion */
+  .ba-after {
+    clip-path: inset(0 0 0 calc(100% - var(--split)));
+  }
+
+  /* Divider line */
+  .ba-divider {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: var(--split);
+    width: 3px;
+    background: rgba(255, 255, 255, 0.9);
+    transform: translateX(-1.5px);
+    pointer-events: none;
+    z-index: 5;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Handle circle on the divider */
+  .ba-handle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 44px;
+    height: 44px;
+    background: var(--color-white);
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    box-shadow: var(--shadow-lg);
+    color: var(--color-primary);
+  }
+
+  /* Before / After labels */
+  .ba-badge {
+    position: absolute;
+    top: var(--space-3);
+    padding: var(--space-1) var(--space-3);
+    background: rgba(0, 0, 0, 0.55);
+    color: var(--color-white);
+    font-size: var(--font-xs);
+    font-weight: var(--weight-bold);
+    font-family: var(--font-heading);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-radius: var(--radius-full);
+    pointer-events: none;
+    z-index: 4;
+  }
+
+  .ba-badge--before { left: var(--space-3); }
+  .ba-badge--after  { right: var(--space-3); }
+
+  /* The range input sits over everything, fully transparent */
+  .ba-range {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: ew-resize;
+    z-index: 10;
+    margin: 0;
+    padding: 0;
+  }
+</style>
+
+<script>
+  // Initialize all sliders on the page
+  document.querySelectorAll<HTMLDivElement>('.ba-container').forEach(container => {
+    const input = container.querySelector<HTMLInputElement>('.ba-range');
+    if (!input) return;
+
+    function update(val: string) {
+      container.style.setProperty('--split', val + '%');
+    }
+
+    input.addEventListener('input', () => update(input.value));
+
+    // Touch support: ensure ew-resize cursor on mobile too
+    input.addEventListener('touchmove', (e) => {
+      e.preventDefault();
+    }, { passive: false });
+  });
+</script>

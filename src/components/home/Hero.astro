@@ -1,0 +1,158 @@
+---
+import { site } from '../../data/site';
+
+const heroImageSrc = '/images/hero.png';
+---
+
+<section class="hero" aria-labelledby="hero-heading">
+  <!-- Background image with gradient overlay -->
+  <div class="hero-bg" aria-hidden="true">
+    <img
+      src={heroImageSrc}
+      alt=""
+      class="hero-img"
+      fetchpriority="high"
+      decoding="async"
+      width="1920"
+      height="1080"
+    />
+    <div class="hero-overlay"></div>
+  </div>
+
+  <div class="container hero-content">
+    <div class="hero-badge">Serving {site.serviceArea}</div>
+    <h1 id="hero-heading">Your Yard,<br />Transformed.</h1>
+    <p class="hero-tagline">
+      Lawns, patios, outdoor kitchens, mulching, and cleanups.<br />
+      Reliable work. Fair prices. Results you can see.
+    </p>
+    <div class="hero-ctas">
+      <a href="/contact" class="btn btn-white btn-lg">Request Free Quote</a>
+      <a href={site.phoneTel} class="btn btn-outline-white btn-lg">Call {site.phone}</a>
+      <a href={site.phoneSms} class="btn btn-outline-white btn-lg">Text Us</a>
+    </div>
+    <div class="hero-trust">
+      <div class="trust-item">
+        <span class="trust-icon" aria-hidden="true">✓</span>
+        <span>Free Estimates</span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-icon" aria-hidden="true">✓</span>
+        <span>Same-Week Availability</span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-icon" aria-hidden="true">✓</span>
+        <span>Locally Owned &amp; Operated</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    color: var(--color-white);
+    overflow: hidden;
+  }
+
+  /* Background image layer */
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 60%;
+  }
+
+  /* Dark gradient overlay — keeps text readable over any photo */
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(26, 46, 26, 0.88) 0%,
+      rgba(45, 90, 39, 0.80) 55%,
+      rgba(26, 46, 26, 0.70) 100%
+    );
+  }
+
+  /* Content sits above the bg */
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    padding-top: var(--space-20);
+    padding-bottom: var(--space-20);
+    text-align: center;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: var(--radius-full);
+    padding: var(--space-2) var(--space-5);
+    font-size: var(--font-sm);
+    font-weight: var(--weight-semibold);
+    font-family: var(--font-heading);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: var(--space-6);
+    color: rgba(255, 255, 255, 0.95);
+  }
+
+  .hero h1 {
+    color: var(--color-white);
+    font-size: clamp(var(--font-4xl), 8vw, var(--font-6xl));
+    font-weight: var(--weight-extrabold);
+    line-height: 1.1;
+    margin-bottom: var(--space-6);
+    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.4);
+  }
+
+  .hero-tagline {
+    font-size: clamp(var(--font-base), 2.5vw, var(--font-xl));
+    color: rgba(255, 255, 255, 0.9);
+    line-height: var(--leading-relaxed);
+    max-width: 600px;
+    margin: 0 auto var(--space-10);
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.3);
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: var(--space-4);
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: var(--space-12);
+  }
+
+  .hero-trust {
+    display: flex;
+    gap: var(--space-6);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--font-sm);
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: var(--weight-medium);
+  }
+
+  .trust-icon {
+    color: var(--color-green-300);
+    font-weight: var(--weight-bold);
+    font-size: var(--font-base);
+  }
+</style>

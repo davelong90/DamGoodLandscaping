@@ -1,0 +1,43 @@
+---
+import { site } from '../../data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  primaryText?: string;
+  primaryHref?: string;
+  secondaryText?: string;
+  secondaryHref?: string;
+  variant?: 'green' | 'light' | 'white';
+}
+
+const {
+  title = 'Ready to Transform Your Yard?',
+  description = `Request a free quote today. We serve ${site.serviceArea}.`,
+  primaryText = 'Request Free Quote',
+  primaryHref = '/contact',
+  secondaryText,
+  secondaryHref,
+  variant = 'green',
+} = Astro.props;
+---
+
+<div class={`cta-block cta-block--${variant}`}>
+  <div class="container">
+    <h2>{title}</h2>
+    <p>{description}</p>
+    <div class="cta-buttons">
+      <a href={primaryHref} class={variant === 'green' ? 'btn btn-white btn-lg' : 'btn btn-primary btn-lg'}>
+        {primaryText}
+      </a>
+      {secondaryText && secondaryHref && (
+        <a href={secondaryHref} class={variant === 'green' ? 'btn btn-outline-white btn-lg' : 'btn btn-outline btn-lg'}>
+          {secondaryText}
+        </a>
+      )}
+      <a href={site.phoneTel} class={variant === 'green' ? 'btn btn-outline-white btn-lg' : 'btn btn-outline btn-lg'}>
+        Call {site.phone}
+      </a>
+    </div>
+  </div>
+</div>

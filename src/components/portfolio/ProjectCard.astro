@@ -1,0 +1,95 @@
+---
+import ServiceTag from '../shared/ServiceTag.astro';
+
+interface Props {
+  id: string;
+  title: string;
+  location: string;
+  thumbnail: string;
+  services: string[];
+  excerpt?: string;
+}
+
+const { id, title, location, thumbnail, services, excerpt } = Astro.props;
+---
+
+<article class="card project-card">
+  <a href={`/portfolio/${id}`} class="card-image-link" tabindex="-1" aria-hidden="true">
+    <img
+      src={thumbnail}
+      alt={`${title} — before and after project`}
+      class="card-img"
+      loading="lazy"
+      width="800"
+      height="600"
+    />
+  </a>
+  <div class="card-body">
+    <div class="tag-group mb-4">
+      {services.map(s => <ServiceTag service={s} />)}
+    </div>
+    <h3 class="card-title">
+      <a href={`/portfolio/${id}`}>{title}</a>
+    </h3>
+    <p class="card-meta">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline;vertical-align:-2px;margin-right:4px;">
+        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+        <circle cx="12" cy="10" r="3"/>
+      </svg>
+      {location}
+    </p>
+    {excerpt && <p class="card-excerpt">{excerpt}</p>}
+    <a href={`/portfolio/${id}`} class="btn btn-outline btn-sm card-link">
+      View Project
+    </a>
+  </div>
+</article>
+
+<style>
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .card-image-link {
+    display: block;
+    overflow: hidden;
+  }
+
+  .card-image-link:hover .card-img {
+    transform: scale(1.04);
+  }
+
+  .card-img {
+    transition: transform var(--transition-slow);
+  }
+
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .card-title a {
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .card-title a:hover {
+    color: var(--color-primary);
+  }
+
+  .card-excerpt {
+    font-size: var(--font-sm);
+    color: var(--color-text-muted);
+    line-height: var(--leading-relaxed);
+    flex: 1;
+    margin-bottom: var(--space-4);
+  }
+
+  .card-link {
+    align-self: flex-start;
+    margin-top: auto;
+  }
+</style>

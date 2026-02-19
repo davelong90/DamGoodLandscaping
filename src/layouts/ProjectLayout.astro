@@ -1,0 +1,31 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import { site } from '../data/site';
+
+interface Props {
+  title: string;
+  excerpt?: string;
+  thumbnail?: string;
+}
+
+const {
+  title,
+  excerpt,
+  thumbnail,
+} = Astro.props;
+
+const description = excerpt
+  ? `${excerpt} — ${site.name} serves ${site.serviceArea}.`
+  : `${title} — Professional landscaping project by ${site.name} in ${site.serviceArea}.`;
+
+const ogImage = thumbnail || '/images/og-default.jpg';
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  ogImage={ogImage}
+  ogType="article"
+>
+  <slot />
+</BaseLayout>

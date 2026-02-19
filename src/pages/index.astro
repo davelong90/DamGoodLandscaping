@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/home/Hero.astro';
+import ServicesGrid from '../components/home/ServicesGrid.astro';
+import FeaturedProjects from '../components/home/FeaturedProjects.astro';
+import HowItWorks from '../components/home/HowItWorks.astro';
+import Testimonials from '../components/home/Testimonials.astro';
+import HomeCTA from '../components/home/HomeCTA.astro';
+import { site } from '../data/site';
+---
+
+<BaseLayout
+  title={site.name}
+  description={`${site.name} — ${site.tagline}. Professional lawn care, mulching, bed edging, and yard cleanups serving ${site.serviceArea}. Call for a free estimate.`}
+>
+  <Hero />
+  <ServicesGrid />
+  <FeaturedProjects />
+  <HowItWorks />
+  <Testimonials />
+  <HomeCTA />
+</BaseLayout>

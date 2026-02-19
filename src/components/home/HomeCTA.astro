@@ -1,0 +1,61 @@
+---
+import { site } from '../../data/site';
+---
+
+<section class="section section-dark" aria-labelledby="home-cta-heading">
+  <div class="container">
+    <div class="home-cta-inner">
+      <h2 id="home-cta-heading">
+        Ready for a Yard You Are Proud Of?
+      </h2>
+      <p>
+        Call, text, or fill out the form and we will get back to you fast.
+        Free estimates, no pressure. Serving {site.serviceArea}.
+      </p>
+      <div class="cta-buttons">
+        <a href="/contact" class="btn btn-white btn-lg">Request Free Quote</a>
+        <a href={site.phoneTel} class="btn btn-outline-white btn-lg">
+          Call {site.phone}
+        </a>
+        <a href={site.phoneSms} class="btn btn-outline-white btn-lg">
+          Text Us
+        </a>
+      </div>
+      <p class="hours-note">Available {site.hours}</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .home-cta-inner {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .home-cta-inner h2 {
+    font-size: clamp(var(--font-2xl), 4vw, var(--font-4xl));
+    margin-bottom: var(--space-4);
+  }
+
+  .home-cta-inner > p {
+    font-size: var(--font-lg);
+    opacity: 0.9;
+    margin-bottom: var(--space-8);
+    line-height: var(--leading-relaxed);
+  }
+
+  .hours-note {
+    margin-top: var(--space-6);
+    font-size: var(--font-sm);
+    opacity: 0.6;
+    margin-bottom: 0;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: var(--space-4);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+</style>

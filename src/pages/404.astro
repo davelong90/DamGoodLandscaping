@@ -1,0 +1,83 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+---
+
+<BaseLayout
+  title="Page Not Found"
+  description="The page you are looking for could not be found."
+  noIndex={true}
+>
+  <section class="notfound-section">
+    <div class="container notfound-content">
+      <div class="notfound-icon" aria-hidden="true">
+        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 8v4"/>
+          <path d="M12 16h.01"/>
+        </svg>
+      </div>
+      <h1>Page Not Found</h1>
+      <p>
+        Looks like this page got overgrown and we can't find it anymore.
+        Let us help you get back on track.
+      </p>
+      <div class="notfound-ctas">
+        <a href="/" class="btn btn-primary btn-lg">Go Home</a>
+        <a href="/portfolio" class="btn btn-outline btn-lg">See Our Work</a>
+        <a href="/contact" class="btn btn-outline btn-lg">Contact Us</a>
+      </div>
+      <p class="notfound-phone">
+        Or give us a call: <a href={site.phoneTel}>{site.phone}</a>
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .notfound-section {
+    min-height: calc(70vh - 64px);
+    display: flex;
+    align-items: center;
+    padding: var(--space-20) 0;
+  }
+
+  .notfound-content {
+    text-align: center;
+    max-width: 560px;
+  }
+
+  .notfound-icon {
+    color: var(--color-green-500);
+    margin-bottom: var(--space-6);
+  }
+
+  h1 {
+    font-size: var(--font-4xl);
+    margin-bottom: var(--space-4);
+  }
+
+  p {
+    color: var(--color-text-muted);
+    font-size: var(--font-lg);
+    margin-bottom: var(--space-8);
+    line-height: var(--leading-relaxed);
+  }
+
+  .notfound-ctas {
+    display: flex;
+    gap: var(--space-4);
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: var(--space-8);
+  }
+
+  .notfound-phone {
+    font-size: var(--font-base);
+    margin-bottom: 0;
+  }
+
+  .notfound-phone a {
+    font-weight: var(--weight-semibold);
+  }
+</style>

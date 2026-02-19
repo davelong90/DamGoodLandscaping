@@ -1,0 +1,205 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CTABlock from '../components/shared/CTABlock.astro';
+import { site } from '../data/site';
+---
+
+<BaseLayout
+  title="About Dave"
+  description={`Meet Dave, the owner of ${site.name}. A solo landscaper serving ${site.serviceArea} with reliable, high-quality work. Learn about his background and values.`}
+>
+  <!-- About hero -->
+  <section class="section section-dark" aria-labelledby="about-heading">
+    <div class="container about-hero">
+      <div class="about-hero-content">
+        <span class="section-label">About</span>
+        <h1 id="about-heading">Built on Reliable, Quality Work</h1>
+        <p>
+          Dam Good Landscaping is a solo operation — just me, Dave, and the work
+          I put into every yard I touch. No large crews, no corners cut, no jobs
+          handed off to someone you never met.
+        </p>
+      </div>
+      <div class="about-hero-image" aria-hidden="true">
+        <div class="about-placeholder-img">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+          <p>Photo coming soon</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Story -->
+  <section class="section" aria-labelledby="story-heading">
+    <div class="container-narrow">
+      <h2 id="story-heading">The Story</h2>
+      <div class="prose">
+        <p>
+          I grew up taking care of my family's property in {site.city}. Mowing, trimming,
+          hauling — it was just part of life. Over the years I picked up more skills and
+          started helping neighbors out on the side. Eventually people started asking me
+          to do the same for them, and Dam Good Landscaping was born.
+        </p>
+        <p>
+          I am not trying to be the biggest landscaping company in {site.state}. I am trying
+          to be the most reliable one in your neighborhood. That means showing up when I
+          say I will, doing the work I promised, and leaving the property cleaner than I
+          found it.
+        </p>
+        <p>
+          Every job gets my full attention because every job has my name on it.
+        </p>
+
+        <h3>What I Offer</h3>
+        <ul>
+          <li>Lawn maintenance — mowing, edging, blowing</li>
+          <li>Mulching and bed edging</li>
+          <li>Shrub trimming and shaping</li>
+          <li>Full yard cleanups and debris removal</li>
+          <li>Seasonal work — spring and fall prep</li>
+        </ul>
+
+        <h3>My Approach</h3>
+        <p>
+          I look at the whole property before I quote anything. I want to understand
+          what is going on before I give you a number. That way there are no surprises
+          when the job is done — for either of us.
+        </p>
+        <p>
+          I document projects with before and after photos because I am proud of the
+          work and I want you to have a record of what was done. It also holds me
+          accountable. If I can't take a good after photo, I am not done.
+        </p>
+
+        <h3>Service Area</h3>
+        <p>
+          Based in {site.city}, {site.state} — serving the surrounding area. Not sure if I
+          cover your neighborhood? Just ask. If it is reasonable, I will make it work.
+        </p>
+
+        <h3>Hours</h3>
+        <p>{site.hours}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values grid -->
+  <section class="section section-alt" aria-labelledby="values-heading">
+    <div class="container">
+      <h2 id="values-heading" class="text-center" style="margin-bottom: var(--space-12);">
+        What You Can Count On
+      </h2>
+      <div class="values-grid grid grid-3">
+        {[
+          {
+            title: 'I Show Up',
+            text: 'If we schedule a time, I am there. Reliability is the whole game in this business.',
+          },
+          {
+            title: 'Fair Prices',
+            text: 'I charge for what the job actually takes. No inflated estimates, no mystery fees.',
+          },
+          {
+            title: 'Clean Work',
+            text: 'I haul away what I cut. The yard looks better when I leave than when I arrived.',
+          },
+          {
+            title: 'Honest Quotes',
+            text: 'I will tell you what your yard needs — and what it does not need. No upselling.',
+          },
+          {
+            title: 'Responsive',
+            text: 'I answer texts and calls. If I miss one, I call back the same day.',
+          },
+          {
+            title: 'Before & After Docs',
+            text: 'I photograph every project. You get a clear record of the work done.',
+          },
+        ].map(v => (
+          <div class="value-card card card-body">
+            <h3 class="value-title">{v.title}</h3>
+            <p>{v.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section">
+    <div class="container">
+      <CTABlock
+        title="Let's Talk About Your Yard"
+        description={`Ready to get started? Reach out and I will come take a look — no charge. Serving ${site.serviceArea}.`}
+        primaryText="Request a Free Quote"
+        primaryHref="/contact"
+        secondaryText="See My Work"
+        secondaryHref="/portfolio"
+        variant="green"
+      />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .about-hero {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-10);
+    align-items: center;
+  }
+
+  @media (min-width: 768px) {
+    .about-hero {
+      grid-template-columns: 1.4fr 1fr;
+    }
+  }
+
+  .about-hero-content {
+    color: var(--color-white);
+  }
+
+  .about-hero-content h1 {
+    color: var(--color-white);
+    margin-bottom: var(--space-5);
+  }
+
+  .about-hero-content p {
+    color: rgba(255,255,255,0.85);
+    font-size: var(--font-lg);
+    line-height: var(--leading-relaxed);
+  }
+
+  .about-placeholder-img {
+    background: rgba(255,255,255,0.08);
+    border: 2px dashed rgba(255,255,255,0.25);
+    border-radius: var(--radius-xl);
+    aspect-ratio: 3/4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    color: rgba(255,255,255,0.4);
+    font-size: var(--font-sm);
+  }
+
+  .values-grid .card-body {
+    height: 100%;
+  }
+
+  .value-title {
+    font-size: var(--font-lg);
+    margin-bottom: var(--space-3);
+    color: var(--color-primary);
+  }
+
+  .value-card p {
+    color: var(--color-text-muted);
+    font-size: var(--font-sm);
+    line-height: var(--leading-relaxed);
+  }
+</style>

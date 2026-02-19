@@ -1,0 +1,17 @@
+---
+interface Props {
+  id?: string;
+  label?: string;
+  title: string;
+  subtitle?: string;
+  align?: 'left' | 'center';
+}
+
+const { id, label, title, subtitle, align = 'center' } = Astro.props;
+---
+
+<div id={id} class={`section-header section-header--${align}`}>
+  {label && <span class="section-label">{label}</span>}
+  <h2>{title}</h2>
+  {subtitle && <p>{subtitle}</p>}
+</div>

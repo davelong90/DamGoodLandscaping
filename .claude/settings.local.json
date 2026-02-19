@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "Bash(npm install:*)",
+      "Bash(timeout 30 npm run dev:*)",
+      "Bash(sudo -n true:*)",
+      "Bash(bash)",
+      "Bash(export:*)",
+      "Bash([ -s \"$NVM_DIR/nvm.sh\" ])",
+      "Bash(. \"$NVM_DIR/nvm.sh\")",
+      "Bash(nvm install:*)",
+      "Bash(source:*)",
+      "Bash(nvm use:*)",
+      "Bash(node --version:*)",
+      "Bash(timeout 25 npm run dev)",
+      "Bash(npm run build:*)",
+      "Bash(npm run check:*)",
+      "Bash(npm run dev:*)",
+      "Bash(npm run preview:*)"
+    ]
+  }
+}

@@ -1,0 +1,129 @@
+---
+import SectionHeader from '../shared/SectionHeader.astro';
+
+const steps = [
+  {
+    number: '01',
+    title: 'Request a Free Quote',
+    description:
+      'Call, text, or fill out the form on this site. Tell us what you need and where you are — we respond fast.',
+  },
+  {
+    number: '02',
+    title: 'Get Your Custom Plan',
+    description:
+      'We come out, look at the property, and give you a clear estimate. No guesswork, no hidden fees.',
+  },
+  {
+    number: '03',
+    title: 'We Get It Done',
+    description:
+      'We show up when we say we will and do the job right. Clean work, every time — and we haul away the debris.',
+  },
+];
+---
+
+<section class="section" aria-labelledby="how-heading">
+  <div class="container">
+    <SectionHeader
+      label="How It Works"
+      title="Getting Started Is Simple"
+      subtitle="Three easy steps to a yard you are proud of."
+    />
+
+    <div class="steps">
+      {steps.map((step, i) => (
+        <div class="step">
+          <div class="step-number" aria-hidden="true">{step.number}</div>
+          {i < steps.length - 1 && (
+            <div class="step-connector" aria-hidden="true"></div>
+          )}
+          <div class="step-body">
+            <h3>{step.title}</h3>
+            <p>{step.description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="how-cta">
+      <a href="/contact" class="btn btn-primary btn-lg">Start With a Free Quote</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .steps {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-10);
+    position: relative;
+    max-width: 880px;
+    margin: 0 auto;
+  }
+
+  @media (min-width: 768px) {
+    .steps {
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-6);
+    }
+  }
+
+  .step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--space-4);
+    position: relative;
+  }
+
+  .step-number {
+    width: 64px;
+    height: 64px;
+    background: linear-gradient(135deg, var(--color-green-700), var(--color-green-500));
+    color: var(--color-white);
+    font-family: var(--font-heading);
+    font-size: var(--font-2xl);
+    font-weight: var(--weight-bold);
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: var(--shadow-md);
+  }
+
+  .step-connector {
+    display: none;
+  }
+
+  @media (min-width: 768px) {
+    .step-connector {
+      display: block;
+      position: absolute;
+      top: 32px;
+      left: calc(50% + 40px);
+      width: calc(100% - 80px);
+      height: 2px;
+      background: linear-gradient(to right, var(--color-green-500), var(--color-green-300));
+      transform: translateX(0);
+    }
+  }
+
+  .step-body h3 {
+    font-size: var(--font-xl);
+    margin-bottom: var(--space-3);
+  }
+
+  .step-body p {
+    color: var(--color-text-muted);
+    font-size: var(--font-sm);
+    line-height: var(--leading-relaxed);
+  }
+
+  .how-cta {
+    text-align: center;
+    margin-top: var(--space-12);
+  }
+</style>

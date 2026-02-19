@@ -1,0 +1,91 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/portfolio/ProjectCard.astro';
+import CTABlock from '../../components/shared/CTABlock.astro';
+import { getCollection } from 'astro:content';
+import { site } from '../../data/site';
+
+const allProjects = await getCollection('projects');
+const projects = allProjects.sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime()
+);
+---
+
+<BaseLayout
+  title="Portfolio — Before & After Projects"
+  description={`Browse real before and after landscaping projects by ${site.name} in ${site.serviceArea}. Mulching, bed edging, shrub trimming, yard cleanups, and more.`}
+>
+  <!-- Hero -->
+  <section class="section section-dark" aria-labelledby="portfolio-heading">
+    <div class="container text-center">
+      <span class="section-label">Our Work</span>
+      <h1 id="portfolio-heading">Before &amp; After Projects</h1>
+      <p>
+        Real yards, real transformations. Every project is documented so you can
+        see exactly what we do and the results we deliver.
+      </p>
+    </div>
+  </section>
+
+  <!-- Grid -->
+  <section class="section" aria-label="Project gallery">
+    <div class="container">
+      {projects.length === 0 ? (
+        <p class="text-center text-muted">Projects coming soon.</p>
+      ) : (
+        <>
+          <p class="project-count text-muted">
+            {projects.length} project{projects.length !== 1 ? 's' : ''}
+          </p>
+          <div class="grid grid-3">
+            {projects.map(project => (
+              <ProjectCard
+                id={project.id}
+                title={project.data.title}
+                location={project.data.location}
+                thumbnail={project.data.thumbnail}
+                services={project.data.services}
+                excerpt={project.data.excerpt}
+              />
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section section-alt">
+    <div class="container">
+      <CTABlock
+        title="Want Results Like These?"
+        description={`Request a free quote and let's talk about what we can do for your yard. Serving ${site.serviceArea}.`}
+        primaryText="Get a Free Quote"
+        primaryHref="/contact"
+        secondaryText="See Our Services"
+        secondaryHref="/services"
+        variant="green"
+      />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .section-dark h1 {
+    color: var(--color-white);
+    margin-bottom: var(--space-4);
+    margin-top: var(--space-3);
+  }
+
+  .section-dark p {
+    color: rgba(255,255,255,0.85);
+    font-size: var(--font-lg);
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .project-count {
+    margin-bottom: var(--space-8);
+    font-size: var(--font-sm);
+  }
+</style>

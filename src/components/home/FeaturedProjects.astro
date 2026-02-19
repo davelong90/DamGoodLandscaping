@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content';
+import SectionHeader from '../shared/SectionHeader.astro';
+import ProjectCard from '../portfolio/ProjectCard.astro';
+
+const allProjects = await getCollection('projects');
+const featured = allProjects
+  .filter(p => p.data.featured)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3);
+---
+
+{featured.length > 0 && (
+  <section class="section" aria-labelledby="featured-heading">
+    <div class="container">
+      <SectionHeader
+        label="Recent Work"
+        title="Before &amp; After Projects"
+        subtitle="Real jobs, real results. See what we have done for homeowners in the area."
+      />
+
+      <div class="grid grid-3">
+        {featured.map(project => (
+          <ProjectCard
+            id={project.id}
+            title={project.data.title}
+            location={project.data.location}
+            thumbnail={project.data.thumbnail}
+            services={project.data.services}
+            excerpt={project.data.excerpt}
+          />
+        ))}
+      </div>
+
+      <div class="featured-footer">
+        <a href="/portfolio" class="btn btn-outline btn-lg">See All Projects</a>
+      </div>
+    </div>
+  </section>
+)}
+
+<style>
+  .featured-footer {
+    text-align: center;
+    margin-top: var(--space-12);
+  }
+</style>

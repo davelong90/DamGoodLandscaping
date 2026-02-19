@@ -1,0 +1,148 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeader from '../components/shared/SectionHeader.astro';
+import CTABlock from '../components/shared/CTABlock.astro';
+import { services } from '../data/services';
+import { site } from '../data/site';
+---
+
+<BaseLayout
+  title="Landscaping Services"
+  description={`Professional landscaping services in ${site.serviceArea}: lawn maintenance, mulching, bed edging, shrub trimming, yard cleanups, and seasonal work. Free estimates from ${site.name}.`}
+>
+  <!-- Page hero -->
+  <section class="page-hero section-dark section">
+    <div class="container">
+      <SectionHeader
+        label="What We Offer"
+        title="Landscaping Services"
+        subtitle={`Serving homeowners in ${site.serviceArea}. Free estimates, reliable work.`}
+        align="center"
+      />
+      <div class="page-hero-ctas">
+        <a href="/contact" class="btn btn-white btn-lg">Get a Free Quote</a>
+        <a href={site.phoneTel} class="btn btn-outline-white btn-lg">Call {site.phone}</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services detail -->
+  <section class="section" aria-label="Service details">
+    <div class="container">
+      <div class="services-list">
+        {services.map((service, i) => (
+          <article
+            id={service.slug}
+            class={`service-detail ${i % 2 !== 0 ? 'service-detail--alt' : ''}`}
+          >
+            <div class="service-detail-content">
+              <div class="service-icon-lg" aria-hidden="true">
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10" opacity=".15" fill="currentColor"/>
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
+                </svg>
+              </div>
+              <h2>{service.name}</h2>
+              <p class="service-summary">{service.description}</p>
+              <p class="service-details">{service.details}</p>
+              <a href="/contact" class="btn btn-primary">
+                Request This Service
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom CTA -->
+  <section class="section section-alt">
+    <div class="container">
+      <CTABlock
+        title="Not Sure What You Need?"
+        description={`Just reach out — we will walk your property and recommend the right services. No pressure, free estimate. Serving ${site.serviceArea}.`}
+        primaryText="Contact Us"
+        primaryHref="/contact"
+        secondaryText="View Our Work"
+        secondaryHref="/portfolio"
+        variant="light"
+      />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    text-align: center;
+  }
+
+  .page-hero-ctas {
+    display: flex;
+    gap: var(--space-4);
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: var(--space-8);
+  }
+
+  /* Override section-header colors for dark bg */
+  .page-hero .section-header h2,
+  .page-hero .section-header p {
+    color: var(--color-white);
+  }
+
+  .page-hero .section-label {
+    color: var(--color-green-300);
+  }
+
+  .services-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-16);
+  }
+
+  .service-detail {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+    padding: var(--space-10);
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .service-detail--alt {
+    background: var(--color-bg-alt);
+  }
+
+  .service-icon-lg {
+    width: 72px;
+    height: 72px;
+    background: var(--color-green-100);
+    border-radius: var(--radius-xl);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-primary);
+    margin-bottom: var(--space-4);
+  }
+
+  .service-detail h2 {
+    font-size: var(--font-2xl);
+    color: var(--color-text);
+    margin-bottom: var(--space-3);
+  }
+
+  .service-summary {
+    font-size: var(--font-lg);
+    font-weight: var(--weight-medium);
+    color: var(--color-text);
+    margin-bottom: var(--space-4);
+  }
+
+  .service-details {
+    color: var(--color-text-muted);
+    line-height: var(--leading-relaxed);
+    margin-bottom: var(--space-6);
+  }
+</style>

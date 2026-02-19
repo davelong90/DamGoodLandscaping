@@ -1,0 +1,66 @@
+---
+import { services } from '../../data/services';
+import SectionHeader from '../shared/SectionHeader.astro';
+import { site } from '../../data/site';
+---
+
+<section class="section section-alt" aria-labelledby="services-heading">
+  <div class="container">
+    <SectionHeader
+      id="services-heading"
+      label="What We Do"
+      title={`Landscaping Services in ${site.city}, ${site.state}`}
+      subtitle="From routine lawn maintenance to full yard transformations — we handle it all with reliable, high-quality work."
+    />
+
+    <div class="grid grid-3">
+      {services.map(service => (
+        <article class="service-card card">
+          <div class="card-body">
+            <div class="service-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2a10 10 0 100 20A10 10 0 0012 2z" opacity=".2" fill="currentColor"/>
+                <path d="M12 6v6l4 2"/>
+              </svg>
+            </div>
+            <h3 class="card-title">{service.name}</h3>
+            <p>{service.description}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <div class="services-cta">
+      <a href="/services" class="btn btn-primary btn-lg">View All Services</a>
+      <a href="/contact" class="btn btn-outline btn-lg">Get a Free Quote</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .service-icon {
+    width: 52px;
+    height: 52px;
+    background-color: var(--color-green-100);
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-primary);
+    margin-bottom: var(--space-4);
+  }
+
+  .service-card p {
+    color: var(--color-text-muted);
+    font-size: var(--font-sm);
+    line-height: var(--leading-relaxed);
+  }
+
+  .services-cta {
+    display: flex;
+    gap: var(--space-4);
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: var(--space-12);
+  }
+</style>
