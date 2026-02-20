@@ -55,11 +55,4 @@ export const services: Service[] = [
     details:
       'From simple flagstone pads to full paver patio builds, we handle site prep, base compaction, layout, and installation. A well-built patio adds usable square footage to your property and dramatically improves curb appeal and resale value.',
   },
-  {
-    name: 'Outdoor Kitchens',
-    slug: 'outdoor-kitchens',
-    description: 'Built-in outdoor kitchen setups designed for how you actually entertain.',
-    details:
-      'We build the structural and landscaping components — grading, base prep, paver surrounds, and outdoor living area layout — to support your outdoor kitchen installation. We work alongside appliance and countertop specialists to deliver a finished, polished space.',
-  },
 ];
