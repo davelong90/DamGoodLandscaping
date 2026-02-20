@@ -9,12 +9,8 @@ services:
 thumbnail: /images/projects/paver-patio/after/paver_after_glam.png
 beforeImages:
   - /images/projects/paver-patio/before/paver_patio_before.jpg
-  - /images/projects/paver-patio/before/20251004_112055.jpg
-  - /images/projects/paver-patio/before/20251004_123819.jpg
 afterImages:
   - /images/projects/paver-patio/after/paver_after_glam.png
-  - /images/projects/paver-patio/after/20251025_154456.jpg
-  - /images/projects/paver-patio/after/20251025_154500.jpg
 excerpt: A garden bed in the front of the house was converted into a paver patio, giving the client extra outdoor seating while cutting down on bed maintenance.
 ---
 
