@@ -58,15 +58,8 @@ const {
     <span class="ba-badge ba-badge--before" aria-hidden="true">Before</span>
     <span class="ba-badge ba-badge--after" aria-hidden="true">After</span>
 
-    <!-- Range input (the interactive element) -->
-    <input
-      type="range"
-      min="0"
-      max="100"
-      value="50"
-      class="ba-range"
-      aria-label="Drag to compare before and after"
-    />
+    <!-- Pointer capture overlay -->
+    <div class="ba-overlay" aria-label="Drag to compare before and after" role="slider" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
   </div>
 </figure>
 
@@ -91,6 +84,7 @@ const {
     background: var(--color-gray-200);
     box-shadow: var(--shadow-md);
     user-select: none;
+    touch-action: pan-y;
   }
 
   .ba-img {
@@ -159,35 +153,36 @@ const {
   .ba-badge--before { left: var(--space-3); }
   .ba-badge--after  { right: var(--space-3); }
 
-  /* The range input sits over everything, fully transparent */
-  .ba-range {
+  /* Transparent overlay that captures all pointer/touch events */
+  .ba-overlay {
     position: absolute;
     inset: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    cursor: ew-resize;
     z-index: 10;
-    margin: 0;
-    padding: 0;
+    cursor: ew-resize;
+    touch-action: none;
   }
 </style>
 
 <script>
-  // Initialize all sliders on the page
   document.querySelectorAll<HTMLDivElement>('.ba-container').forEach(container => {
-    const input = container.querySelector<HTMLInputElement>('.ba-range');
-    if (!input) return;
+    const overlay = container.querySelector<HTMLDivElement>('.ba-overlay');
+    if (!overlay) return;
 
-    function update(val: string) {
-      container.style.setProperty('--split', val + '%');
+    function setSplit(clientX: number) {
+      const rect = container.getBoundingClientRect();
+      const pct = Math.min(100, Math.max(0, ((clientX - rect.left) / rect.width) * 100));
+      container.style.setProperty('--split', pct + '%');
+      overlay.setAttribute('aria-valuenow', String(Math.round(pct)));
     }
 
-    input.addEventListener('input', () => update(input.value));
+    overlay.addEventListener('pointerdown', (e) => {
+      overlay.setPointerCapture(e.pointerId);
+      setSplit(e.clientX);
+    });
 
-    // Touch support: ensure ew-resize cursor on mobile too
-    input.addEventListener('touchmove', (e) => {
-      e.preventDefault();
-    }, { passive: false });
+    overlay.addEventListener('pointermove', (e) => {
+      if (!overlay.hasPointerCapture(e.pointerId)) return;
+      setSplit(e.clientX);
+    });
   });
 </script>
